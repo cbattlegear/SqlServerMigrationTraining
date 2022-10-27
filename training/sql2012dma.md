@@ -11,9 +11,13 @@ Resources used and authentication:
  
  ## Steps:
  
-1. Test connection to Azure SQL DB from SQL SErver Management Studio (SSMS)
+1. Test connection to Azure SQL DB from SQL Server Management Studio (SSMS)
    - Bastion into Azure SQL VM. 
    - Sign into Azure SQL DB through SSMS. 
+      
+      **Note** - You will run into a firewall rule prompt. DO NOT add the rule through here. Add the Azure SQL DB firewall rule through the Azure Portal. The client (Azure SQL VM) IP Address needs to be explicity added in order to establish a connection. 
+
+2. 
 
 
 
