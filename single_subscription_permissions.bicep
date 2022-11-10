@@ -11,15 +11,10 @@ param roleId string
 ])
 param principalType string
 
-resource thisRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: resourceGroup()
-  name: roleId
-}
-
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: guid(resourceGroup().id, principalId, thisRoleDefinition.id)
+  name: guid(resourceGroup().id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleId))
   properties: {
-    roleDefinitionId: thisRoleDefinition.id
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleId)
     principalId: principalId
     principalType: principalType
   }
