@@ -26,13 +26,13 @@ Resources used and authentication:
 
 3. Create container for SQL Server database backup in the provided Azure Storage Account
     - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
-    - [Create a container with public access level set to private.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=SSMS#create-azure-blob-storage-container) Name it 'sqlbackup' (Can be any name). 
+    - [Create a container with public access level set to private.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=SSMS#create-azure-blob-storage-container) Name it 'sqlbackup2016' (Can be any name). 
     
 4. T-SQL Backup SQL Server 2016 - AdventureWorks2016 database to URL (Azure Storage Account):
     - Open SSMS and login to the SQL Server 2016. 
     - First step of the backup is to have a container to upload the .bak file (already completed in step 3). 
     - In order to authenticate to the Azure Storage container, you require a SQL Server credential that will include a shared access signature (SAS) for the storage container. 
-    - Create the SAS to your storage container first. The PowerShell script below will create and output the SAS that will be used in the next step. Copy and paste the below script to a text editor. Modify the variables according to your resource names. 
+    - Create the SAS to your storage container first. The PowerShell script below will create and output the SAS that will be used in the next step. Copy and paste the below script to a text editor. Modify the variables according to your resource names. Open Azure Cloud Shell and execute in PowerShell mode. Copy and save the T-SQL output for the next step.  
 
       ```powershell
 
@@ -75,25 +75,20 @@ Resources used and authentication:
 
       ```
 
+    - [Create a SQL Server Credential using the Shared Access Signature.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#credential)    
+
+      ***Note*** - *You will only use the SAS step. DO NOT use the account identity and access key. Make sure you integrate the previous PowerShell T-SQL output into this create credential script and replace resource names accordingly.*
 
 
+     - [Perform a full database backup to URL.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#complete) Only use the first step with SAS. 
 
-    - 
-    - 
-    - [Create a SQL Server Credential](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#credential)    
+5. T-SQL Restore from URL to Azure SQL MI.
+    - Connect to the Azure SQL MI instance from SSMS. 
+    - You need to create a SQL Server Credential on the SQL MI as well to access the storage container with SAS. Luckily you already have the T-SQL. Open a new query on the Azure SQL MI and execute the same CREATE CREDENTIAL T-SQL script that contains the SAS. 
+    - [Now run the restore from URL T-SQL script.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=tsql#restore-database) DO NOT forget to change the restore database name. 
 
-
-
-
-
-
-
-
-
-*Keep in mind the compatibility level and name of the source database and the target database. For this module the target database was predeployed with a different name and compatibility level (150). Ideally these would be configured beforehand. You can change the name of the target database at the end of this module.*
-
- Verify that the schema and data migrated to the target database (Azure SQL DB): 
-    - Use SSMS to login to the Azure SQL DB instance. 
+6. Verify that the AdventureWorks2016 database was properlly restored on the target database (Azure SQL MI): 
+    - If the name of database is different, you did not change it in last step. Therefore you can change it or rerun the restore with correct database name. 
     - Run a simple query against any table and verify records have populated. Compare against source database. 
     - [Check compatibility level of the Azure SQL DB instance.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#TsqlProcedure) 
     - Optional: [Change the Azure SQL Database name to match the source database name.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/rename-a-database?view=sql-server-ver16#to-rename-an-azure-sql-database-database
