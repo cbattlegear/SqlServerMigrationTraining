@@ -79,7 +79,7 @@ Resources used and authentication:
       ***Note*** - *You will only use the SAS step. DO NOT use the account identity and access key. Make sure you integrate the previous PowerShell T-SQL output into this create credential script and replace resource names accordingly.*
 
 
-     - [Perform a full database backup to URL.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#complete) Only use the first step with SAS. 
+     - [Perform a full database backup to URL.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#complete) Only use the first step with SAS and include the 'WITH CHECKSUM' option after the URL string.  
 
 5. T-SQL Restore from URL to Azure SQL MI.
     - Connect to the Azure SQL MI instance from SSMS. 
