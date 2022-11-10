@@ -20,12 +20,24 @@ Resources used and authentication:
     - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
     - Create a container with public access level set to private. Name it 'sqlbackup2019' (Can be any name).
 
-3. 
+3. Backup SQL Server 2019 -AdventureWorks 2019 database to URL (Azure Storage Account). 
+   
+    ***NOTE*** - *Use SSMS GUI to take database backup. Make sure you do Full backup to URL with CHECKSUM. Enable the CHECKSUM option before doing the credential on the backup database pane*
+    
+      *Reason for backup in this module: Azure Database Migration Service does not initiate any backups, and instead uses existing backups, which you may already have as part of your disaster recovery plan, for the migration.* 
+    
+    - [Create SQL Server Credential and backup database to URL via SSMS GUI](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-linux-ver16&tabs=SSMS#create-credential)
 
 4. Use Azure Data Studio to assess and migrate SQL Server 2019 database (AdventureWorks2019) to Azure SQL MI. 
     - Open Azure SQL Data Studio and [install the Azure SQL Migration extension from the marketplace.](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/azure-sql-migration-extension?view=sql-server-ver16#install-the-azure-sql-migration-extension)
     
+    ***NOTE*** - *In the next set of instructions you are prompted to downlaod and install Microsoft Integration runttime, please skip. Not required for this module.*
+    
     - [Follow these instructions to assess and migrate SQL Server.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#launch-the-migrate-to-azure-sql-wizard-in-azure-data-studio)
+
+    - Once you start the live migration, you can [monitor the progress until the backups are restored to SQL MI.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#monitor-your-migration) The Migration status will show 'in progress' until you are ready to cut over. This is the only downtime that will occur during the process. 
+    
+    - Complete the migration cutover and take the last tail logs from the source SQL Server. 
 
 
 Great job, you just completed the second module! Move on the third module, [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](/training/sql2012dma.md)
