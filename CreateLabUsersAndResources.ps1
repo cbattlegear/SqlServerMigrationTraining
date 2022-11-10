@@ -83,9 +83,11 @@ ForEach ($user in Import-Csv $FilePath) {
 Write-Host "All User deployments started, waiting on completion"
 
 $users | ForEach-Object{[PSCustomObject]$_} | Format-Table
+$users | ForEach-Object{[PSCustomObject]$_} | Export-CSV "user_credentials.csv"
 
-While ((Get-Job | Where-Object {$_.State -ne "Complete" -and $_.State -ne "Failed" -and $_.State -ne "Stopped"} | Measure-Object).Count > 0) {
-    Get-AzDeployment
+While ((Get-Job | Where-Object {$_.State -ne "Completed" -and $_.State -ne "Failed" -and $_.State -ne "Stopped"} | Measure-Object).Count -gt 0) {
+    Write-Host "$((Get-AzDeployment | Where-Object {$_.ProvisioningState -eq "Provisioning"} | Measure-Object).Count) Still Running"
+    Write-Host "$((Get-AzDeployment | Where-Object {$_.ProvisioningState -eq "Failed"} | Measure-Object).Count) Have Failed"
     Start-Sleep -Seconds 60
 }
 
