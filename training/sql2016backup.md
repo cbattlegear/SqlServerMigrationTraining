@@ -2,7 +2,7 @@
 
 In this portion of the training you will be doing an assessment and offline migration of SQL Server 2016 using the T-SQL method of back and restore to/from URL. You will backup the source database to an Azure Storage account. Before the backup and restore you are expected to do an assessment of the source database using the Database Migration Assistant (DMA). Verify there are no compatibility or feature parity issues. Address any issues prior to migration. 
 
-**Note** - *There is a method to do this entire process through a GUI, but in this module we will do it programatically with T-SQL*
+**Note** - *There is a method to do this entire process through a GUI, but in this module we will do it programatically with T-SQL and a some PowerShell (Azure Cloud Shell)*
 
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
