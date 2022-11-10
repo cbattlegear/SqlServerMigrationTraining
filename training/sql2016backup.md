@@ -2,7 +2,7 @@
 
 In this portion of the training you will be doing an assessment and offline migration of SQL Server 2016 using the T-SQL method of back and restore to/from URL. You will backup the source database to an Azure Storage account. Before the backup and restore you are expected to do an assessment of the source database using the Database Migration Assistant (DMA). Verify there are no compatibility or feature parity issues. Address any issues prior to migration. 
 
-**Note** - *There is a method to do this entire process through a GUI, but in this module we will do it programatically with T-SQL and a some PowerShell (Azure Cloud Shell)*
+**Note** - *There is a method to do this entire process through a GUI, but in this module you will do it programatically with T-SQL and a some PowerShell (Azure Cloud Shell)*
 
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
@@ -20,7 +20,7 @@ Resources used and authentication:
    - Project Type = Assessment
    - Target Server type = Azure SQL Database Managed Instance
    
-      **Note** - *Keep in mind the source database compatibility level as the run the assessment.*
+      **Note** - *Keep in mind the source database compatibility level as you the run the assessment.*
    - [Instructions to run assesment with DMA.](https://learn.microsoft.com/en-us/sql/dma/dma-assesssqlonprem?view=sql-server-ver16#create-an-assessment)
    - Verify there are no feature parity or compatibility issues. Fix any issues before migrating the database.
 
@@ -31,7 +31,18 @@ Resources used and authentication:
 4. T-SQL Backup SQL Server 2016 - AdventureWorks2016 database to URL (Azure Storage Account):
     - Open SSMS and login to the SQL Server 2016. 
     - First step of the backup is to have a container to upload the .bak file (already completed in step 3). 
-    - In order to authenticate to the Azure Storage container, you require a SQL Server credential that will include a shared access signature for the storage container. [Create a SQL Server Credential](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#credential)    
+    - In order to authenticate to the Azure Storage container, you require a SQL Server credential that will include a shared access signature (SAS) for the storage container. 
+    - Create the SAS to your storage container first. The PowerShell script below will create and output the SAS that will be used in the next step. Copy and paste the below script to a text editor. Modify the variables according to your resource names. 
+
+    ```powershell
+    ```
+
+
+
+
+    - 
+    - 
+    - [Create a SQL Server Credential](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#credential)    
 
 
 
