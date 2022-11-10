@@ -32,7 +32,7 @@ Resources used and authentication:
     - Open SSMS and login to the SQL Server 2016. 
     - First step of the backup is to have a container to upload the .bak file (already completed in step 3). 
     - In order to authenticate to the Azure Storage container, you require a SQL Server credential that will include a shared access signature (SAS) for the storage container. 
-    - Create the SAS to your storage container first. The PowerShell script below will create and output the SAS that will be used in the next step. Copy and paste the below script to a text editor. Modify the variables according to your resource names. Open Azure Cloud Shell and execute in PowerShell mode. Copy and save the T-SQL output for the next step.  
+    - Create the SAS to your storage container first. The PowerShell script below will create and output the T-SQL 'Create Credential' with the SAS that will be used in the next step. Copy and paste the below script to a text editor. Modify the variables according to your resource names. Open Azure Cloud Shell and execute in PowerShell mode. Copy and save the T-SQL output for the next step.  
 
       ```powershell
 
