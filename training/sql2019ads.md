@@ -16,9 +16,19 @@ Resources used and authentication:
    - Bastion into Azure SQL VM. 
    - Sign into Azure SQL MI through SSMS. 
 
-3. Create container for SQL Server database backup in the provided Azure Storage Account
+2. Create container for SQL Server database backup in the provided Azure Storage Account
     - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
     - Create a container with public access level set to private. Name it 'sqlbackup2019' (Can be any name).
 
+3. 
 
-2. Open Azure SQL Data Studio and [install the Azure SQL Migration extension from the marketplace.](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/azure-sql-migration-extension?view=sql-server-ver16#install-the-azure-sql-migration-extension)
+4. Use Azure Data Studio to assess and migrate SQL Server 2019 database (AdventureWorks2019) to Azure SQL MI. 
+    - Open Azure SQL Data Studio and [install the Azure SQL Migration extension from the marketplace.](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/azure-sql-migration-extension?view=sql-server-ver16#install-the-azure-sql-migration-extension)
+    
+    - [Follow these instructions to assess and migrate SQL Server.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#launch-the-migrate-to-azure-sql-wizard-in-azure-data-studio)
+
+
+Great job, you just completed the second module! Move on the third module, [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](/training/sql2012dma.md)
+
+
+
