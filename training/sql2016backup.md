@@ -1,12 +1,14 @@
-# Migrate SQL Server 2016 to Azure SQL Managed Instance using TSQL Backup/Restore to/from URL - Offline
+# Migrate SQL Server 2016 to Azure SQL Managed Instance using T-SQL Backup/Restore to/from URL - Offline
 
-In this portion of the training you will be doing an assessment and offline migration of SQL Server 2016 using the TSQL method of back and restore to/from URL. You will backup the source database to an Azure Storage account. Before the backup and restore you are expected to do an assessment of the source database using the Database Migration Assistant (DMA). Verify there are no compatibility or feature parity issues. Address any issues prior to migration. 
+In this portion of the training you will be doing an assessment and offline migration of SQL Server 2016 using the T-SQL method of back and restore to/from URL. You will backup the source database to an Azure Storage account. Before the backup and restore you are expected to do an assessment of the source database using the Database Migration Assistant (DMA). Verify there are no compatibility or feature parity issues. Address any issues prior to migration. 
+
+**Note** - *There is a method to do this entire process through a GUI, but in this module we will do it programatically with T-SQL*
 
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
     - SQL Server 2016 - AdventureWorks2016 (Windows Authentication)
   - Azure SQL MI (SQL Server Authentication - Same username/password) 
-  - Azure Storage Account 
+  - Azure Storage Account (SQL Server Credential will be created to authenticate) 
 
 ## Steps
 
@@ -24,8 +26,19 @@ Resources used and authentication:
 
 3. Create container for SQL Server database backup in the provided Azure Storage Account
     - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
-    - [Create a container with public access level set to private.](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal#create-a-container) Name it 'sqlbackup' (Can be any name). 
-    - 
+    - [Create a container with public access level set to private.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=SSMS#create-azure-blob-storage-container) Name it 'sqlbackup' (Can be any name). 
+    
+4. T-SQL Backup SQL Server 2016 - AdventureWorks2016 database to URL (Azure Storage Account):
+    - Open SSMS and login to the SQL Server 2016. 
+    - First step of the backup is to have a container to upload the .bak file (already completed in step 3). 
+    - In order to authenticate to the Azure Storage container, you require a SQL Server credential that will include a shared access signature for the storage container. [Create a SQL Server Credential](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/sql-server-backup-to-url?view=sql-server-ver16#credential)    
+
+
+
+
+
+
+
 
 
 *Keep in mind the compatibility level and name of the source database and the target database. For this module the target database was predeployed with a different name and compatibility level (150). Ideally these would be configured beforehand. You can change the name of the target database at the end of this module.*
