@@ -15,12 +15,36 @@ param administratorLogin string
 @minLength(12)
 param administratorLoginPassword string
 
-resource sqlServer 'Microsoft.Sql/servers@2021-08-01-preview' = {
+param withAADAdmin bool = false
+
+@description('The name of the Azure AD admin for the SQL server.')
+param aad_admin_name string = 'none'
+
+@description('The Object ID of the Azure AD admin.')
+param aad_admin_objectid string = 'none'
+
+@description('The Tenant ID of the Azure Active Directory')
+param aad_admin_tenantid string = subscription().tenantId
+
+@allowed([
+  'User'
+  'Group'
+  'Application'
+])
+param aad_admin_type string = 'User'
+
+resource sqlServer'Microsoft.Sql/servers@2021-08-01-preview' =  {
   name: sqlDBServerName
   location: location
   properties: {
     administratorLogin: administratorLogin
     administratorLoginPassword: administratorLoginPassword
+    administrators: (withAADAdmin) ? {
+      login: aad_admin_name
+      sid: aad_admin_objectid
+      tenantId: aad_admin_tenantid
+      principalType: aad_admin_type
+    } : null
   }
 }
 

@@ -16,12 +16,6 @@ param sqlMiSubnetName string = 'ManagedInstance'
 @description('Enter subnet address prefix.')
 param sqlMiSubnetPrefix string = '10.217.1.0/24'
 
-@description('Enter Managed Instance subnet name.')
-param vmSubnetName string = 'VMSubnet'
-
-@description('Enter subnet address prefix.')
-param vmSubnetPrefix string = '10.217.3.0/24'
-
 @description('Enter the Bastion host name.')
 param bastionHostName string
 
@@ -138,12 +132,6 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
         name: bastionSubnetName
         properties: {
           addressPrefix: bastionSubnetIpPrefix
-        }
-      }
-      {
-        name: vmSubnetName
-        properties: {
-          addressPrefix: vmSubnetPrefix
         }
       }
     ]

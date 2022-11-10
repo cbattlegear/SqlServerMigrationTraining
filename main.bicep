@@ -182,10 +182,21 @@ module network 'network.bicep' = {
     bastionSubnetIpPrefix: bastionSubnetIpPrefix
     sqlMiSubnetName: sqlMiSubnetName
     sqlMiSubnetPrefix: sqlMiSubnetPrefix
-    vmSubnetName: vmSubnetName
-    vmSubnetPrefix: vmSubnetPrefix
     bastionHostName: bastionHostName
   }
+}
+
+module vmsubnet 'single_subscription_vm_subnet.bicep' = {
+  name: 'vmSubnetDeployment'
+  scope: rg
+  params: {
+    existingVNETName: virtualNetworkName
+    newSubnetName: vmSubnetName
+    newSubnetAddressPrefix: vmSubnetPrefix
+  }
+  dependsOn: [
+    network
+  ]
 }
 
 module labvm 'labvm.bicep' = {
@@ -200,7 +211,7 @@ module labvm 'labvm.bicep' = {
     vmSubnetName: vmSubnetName
   }
   dependsOn: [
-    network
+    vmsubnet
   ]
 }
 
@@ -229,6 +240,7 @@ module dbmi 'dbmi.bicep' = {
     vCores: vCores
     storageSizeInGB: storageSizeInGB
     licenseType: licenseType
+    withAADAuth: false
   }
   dependsOn: [
     network

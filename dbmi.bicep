@@ -47,6 +47,24 @@ param storageSizeInGB int = 256
 ])
 param licenseType string = 'LicenseIncluded'
 
+param withAADAuth bool = false
+
+@description('The name of the Azure AD admin for the SQL server.')
+param aad_admin_name string = 'none'
+
+@description('The Object ID of the Azure AD admin.')
+param aad_admin_objectid string = 'none'
+
+@description('The Tenant ID of the Azure Active Directory')
+param aad_admin_tenantid string = subscription().tenantId
+
+@allowed([
+  'User'
+  'Group'
+  'Application'
+])
+param aad_admin_type string = 'Group'
+
 @description('Enter virtual network name. If you leave this field blank name will be created by the template.')
 param virtualNetworkName string = 'SQLMigrationLab-vNet'
 
@@ -73,5 +91,11 @@ resource managedInstance 'Microsoft.Sql/managedInstances@2021-11-01-preview' = {
     storageSizeInGB: storageSizeInGB
     vCores: vCores
     licenseType: licenseType
+    administrators: (withAADAuth) ? {
+      login: aad_admin_name
+      sid: aad_admin_objectid
+      tenantId: aad_admin_tenantid
+      principalType: aad_admin_type
+    } : null
   }
 }
