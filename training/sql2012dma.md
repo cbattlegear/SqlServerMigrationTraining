@@ -19,7 +19,7 @@ Resources used and authentication:
       
       **Note** - *Do the assessment and migration in one step. There is an option available to do the assessment and view/apply recommended fixes before migrating. The option will be available after you create and select the 'Migration' project type. To use this option, select the 'Access database before migration?' check box.* 
       
-      ![image](https://user-images.githubusercontent.com/53837525/201004994-0abcccdd-3519-45db-840e-71369416385d.png)
+      ![Checkbox to access and apply recommendations before migrating](./images/Checkbox_AccessBeforeMigration.png)
       
       *Keep in mind the compatibility level and name of the source database and the target database. For this module the target database was predeployed with a different name and compatibility level (150). Ideally these would be configured beforehand. You can change the name of the target database at the end of this module.*
       
