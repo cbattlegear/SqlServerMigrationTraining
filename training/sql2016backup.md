@@ -18,8 +18,20 @@ Resources used and authentication:
    - Project Type = Assessment
    - Target Server type = Azure SQL Database Managed Instance
    
-      **Note** - *Keep in mind the source database compatibility level as the run the assessment*
-   - [Instructions to run assesment with DMA](https://learn.microsoft.com/en-us/sql/dma/dma-assesssqlonprem?view=sql-server-ver16#create-an-assessment)
+      **Note** - *Keep in mind the source database compatibility level as the run the assessment.*
+   - [Instructions to run assesment with DMA.](https://learn.microsoft.com/en-us/sql/dma/dma-assesssqlonprem?view=sql-server-ver16#create-an-assessment)
    - Verify there are no feature parity or compatibility issues. Fix any issues before migrating the database.
 
-3. 
+3. Create container for SQL Server database backup in the provided Azure Storage Account
+    - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
+    - [Create a container with public access level set to private.](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal#create-a-container) Name it 'sqlbackup' (Can be any name). 
+    - 
+
+
+*Keep in mind the compatibility level and name of the source database and the target database. For this module the target database was predeployed with a different name and compatibility level (150). Ideally these would be configured beforehand. You can change the name of the target database at the end of this module.*
+
+ Verify that the schema and data migrated to the target database (Azure SQL DB): 
+    - Use SSMS to login to the Azure SQL DB instance. 
+    - Run a simple query against any table and verify records have populated. Compare against source database. 
+    - [Check compatibility level of the Azure SQL DB instance.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#TsqlProcedure) 
+    - Optional: [Change the Azure SQL Database name to match the source database name.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/rename-a-database?view=sql-server-ver16#to-rename-an-azure-sql-database-database
