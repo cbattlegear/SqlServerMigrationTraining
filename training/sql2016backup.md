@@ -1,8 +1,8 @@
 # Migrate SQL Server 2016 to Azure SQL Managed Instance using T-SQL Backup/Restore to/from URL - Offline
 
-In this portion of the training you will be doing an assessment and offline migration of SQL Server 2016 using the T-SQL method of back and restore to/from URL. You will backup the source database to an Azure Storage account. Before the backup and restore you are expected to do an assessment of the source database using the Database Migration Assistant (DMA). Verify there are no compatibility or feature parity issues. Address any issues prior to migration. 
+In this portion of the training you will be doing an assessment and offline migration of SQL Server 2016 using the T-SQL method of back and restore to/from URL. You will back up the source database to an Azure Storage account. Before the backup and restore you are expected to do an assessment of the source database using the Database Migration Assistant (DMA). Verify there are no compatibility or feature parity issues. Address any issues prior to migration. 
 
-**Note** - *There is a method to do this entire process through a GUI, but in this module you will do it programatically with T-SQL and a some PowerShell (Azure Cloud Shell)*
+**Note** - *There is a method to do this entire process through a GUI, but in this module you will do it programmatically with T-SQL and a some PowerShell (Azure Cloud Shell)*
 
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
@@ -21,7 +21,7 @@ Resources used and authentication:
    - Target Server type = Azure SQL Database Managed Instance
    
       **Note** - *Keep in mind the source database compatibility level as you the run the assessment.*
-   - [Instructions to run assesment with DMA.](https://learn.microsoft.com/en-us/sql/dma/dma-assesssqlonprem?view=sql-server-ver16#create-an-assessment)
+   - [Instructions to run assessment with DMA.](https://learn.microsoft.com/en-us/sql/dma/dma-assesssqlonprem?view=sql-server-ver16#create-an-assessment)
    - Verify there are no feature parity or compatibility issues. Fix any issues before migrating the database.
 
 3. Create container for SQL Server database backup in the provided Azure Storage Account
@@ -87,8 +87,9 @@ Resources used and authentication:
     - You need to create a SQL Server Credential on the SQL MI as well to access the storage container with SAS. Luckily you already have the T-SQL. Open a new query on the Azure SQL MI and execute the same CREATE CREDENTIAL T-SQL script that contains the SAS. 
     - [Now run the restore from URL T-SQL script.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=tsql#restore-database) DO NOT forget to change the restore database name. 
 
-6. Verify that the AdventureWorks2016 database was properlly restored on the target database (Azure SQL MI): 
+6. Verify that the AdventureWorks2016 database was properly restored on the target database (Azure SQL MI): 
     - If the name of database is different, you did not change it in last step. Therefore [you can change it](https://learn.microsoft.com/en-us/sql/relational-databases/databases/rename-a-database?view=sql-server-ver16#to-rename-an-azure-sql-database-database) or rerun the restore with correct database name. 
     - Run a simple query against any table and verify tables have populated. Compare against source database. 
-    - [Check compatibility level of the Azure SQL DB instance.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#TsqlProcedure) 
+    - [Check compatibility level of the Azure SQL DB instance.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#TsqlProcedure) Make sure it is set to 150. [Change the compatibility level of database](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#change-the-compatibility-level-of-a-database) and verify again. 
     
+Great job, you just completed the first module! Move on the next module. 
