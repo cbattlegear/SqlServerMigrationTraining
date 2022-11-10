@@ -1,6 +1,6 @@
 # Migrate SQL Server 2012 to Azure SQL DB with Data Migration Assistant (DMA) - Offline
 
-In this portion of the training you will be doing an assessment and offline migration of SQL Server 2012 using the Azure Data Migration Assistant (DMA). You are expected to review the assessment and validate that there are no SQL feature parity or compatibility issues that are preventing a migration to Azure SQL DB. Address any issues prior to migrating. 
+In this portion of the training you will be doing an assessment and offline migration of SQL Server 2012 using the Azure Data Migration Assistant (DMA). You are expected to review the assessment and validate that there are no SQL feature parity or compatibility issues that are preventing a migration to Azure SQL DB. Address any issues prior to migration.
 
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
