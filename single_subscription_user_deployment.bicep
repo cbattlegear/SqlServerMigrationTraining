@@ -49,6 +49,8 @@ param sqldb_aad_admin_tenantid string = subscription().tenantId
 ])
 param sqldb_aad_admin_type string = 'Group'
 
+var vmSubNetName = 'vmsub${uniqueString(rg.id)}'
+
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: rgName
   location: location
@@ -74,7 +76,7 @@ module vmsubnet 'single_subscription_vm_subnet.bicep' = {
   scope: networkRg
   params: {
     existingVNETName: virtualNetworkName
-    newSubnetName: 'vmsub${uniqueString(rg.id)}'
+    newSubnetName: vmSubNetName
     newSubnetAddressPrefix: vmSubnetPrefix
   }
 }
@@ -88,7 +90,7 @@ module labvm 'labvm.bicep' = {
     location: location
     administratorLogin: administratorLogin
     administratorLoginPassword: administratorLoginPassword
-    vmSubnetName: vmsubnet.name
+    vmSubnetName: vmSubNetName
   }
   dependsOn: [
     vmsubnet
