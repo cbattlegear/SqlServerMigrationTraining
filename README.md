@@ -41,4 +41,3 @@
 3. [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](./training/sql2012dma.md)
 
 
-PENDING STEPS ... Will be provided day of training 
