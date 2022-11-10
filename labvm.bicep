@@ -16,6 +16,9 @@ param administratorLogin string
 @secure()
 param administratorLoginPassword string
 
+@description('Virtual Network Resource Group')
+param vNetResourceGroup string = 'SQLMigrationLab'
+
 @description('Enter virtual network name. If you leave this field blank name will be created by the template.')
 param virtualNetworkName string = 'SQLMigrationLab-vNet'
 
@@ -25,10 +28,6 @@ param vmSubnetName string = 'VMSubnet'
 var nicName = '${vmName}-NIC'
 var labDeploymentScriptUri = 'https://raw.githubusercontent.com/cbattlegear/SqlServerMigrationTraining/master/InstallSqlServerLabDeployments.ps1'
 var deploymentParameters = '-ComputerName "${vmName}" -UserAccountName "${administratorLogin}" -SqlServiceAccountName "sqlService" -SqlServiceAccountPassword "${administratorLoginPassword}"'
-
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' existing = {
-  name: virtualNetworkName
-}
 
 resource nic 'Microsoft.Network/networkInterfaces@2020-08-01' = {
   name: nicName
@@ -40,15 +39,12 @@ resource nic 'Microsoft.Network/networkInterfaces@2020-08-01' = {
         properties: {
           privateIPAllocationMethod: 'Dynamic'
           subnet: {
-            id: resourceId('Microsoft.Network/virtualNetworks/subnets', virtualNetworkName, vmSubnetName)
+            id: resourceId(vNetResourceGroup, 'Microsoft.Network/virtualNetworks/subnets', virtualNetworkName, vmSubnetName)
           }
         }
       }
     ]
   }
-  dependsOn: [
-    virtualNetwork
-  ]
 }
 
 resource labVm 'Microsoft.Compute/virtualMachines@2020-12-01' = {
