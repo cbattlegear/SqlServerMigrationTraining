@@ -70,7 +70,7 @@ ForEach ($user in Import-Csv $FilePath) {
         sqldb_aad_admin_objectid = $AADuser.ObjectId.ToString()
         sqldb_aad_admin_type = "User"
     }
-    New-AzDeployment -Location $Location -TemplateFile single_subscription_user_deployment.bicep -TemplateParameterObject $UserDeploymentParameters -AsJob
+    New-AzDeployment -Location $Location -TemplateFile single_subscription_user_deployment.bicep -TemplateParameterObject $UserDeploymentParameters -AsJob -Name $(New-Guid).ToString()
     Add-AzureADGroupMember -ObjectId $group.ObjectId.ToString() -RefObjectId $AADuser.ObjectId.ToString()
 
     $users.Add(@{
@@ -96,7 +96,7 @@ $DBMIDeploymentParameters = @{
     administratorLoginPassword = $MIPassword
     withAADAuth = $true
     aad_admin_name = $group.DisplayName
-    sqldb_aad_admin_objectid = $group.ObjectId.ToString()
+    aad_admin_objectid = $group.ObjectId.ToString()
 
 }
 
