@@ -92,5 +92,4 @@ Resources used and authentication:
     - Run a simple query against any table and verify tables have populated. Compare against source database. 
     - [Check compatibility level of the Azure SQL DB instance.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#TsqlProcedure) Make sure it is set to 150. [Change the compatibility level of database](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#change-the-compatibility-level-of-a-database) and verify again. 
     
-Great job, you just completed the first module! Move on the second module, [SQL Server 2019 => Online migration - Azure Data Studio migration to Azure SQL MI](
-SqlServerMigrationTraining/training/sql2019ads.md)
+Great job, you just completed the first module! Move on the second module, [SQL Server 2019 => Online migration - Azure Data Studio migration to Azure SQL MI](/training/sql2019ads.md)
