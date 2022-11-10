@@ -34,6 +34,8 @@ Function Get-Password() {
     return $TempPassword
 }
 
+Connect-AzureAd
+
 Select-AzSubscription -SubscriptionId $SubscriptionId
 
 $group = New-AzureAdGroup -Description "SQL Migration Lab Users" -DisplayName $GroupName -MailEnabled $false -SecurityEnabled $true -MailNickname $GroupName
@@ -44,7 +46,7 @@ $IntialDeploymentParameters = @{
     principalId = $group.ObjectId
 }
 
-Add-AzDeployment -Location $Location -TemplateFile single_subscription_initial_deployment.bicep -TemplateParameterObject $IntialDeploymentParameters
+New-AzDeployment -Location $Location -TemplateFile single_subscription_initial_deployment.bicep -TemplateParameterObject $IntialDeploymentParameters
 
 $SubNetOctet = 3
 
@@ -68,7 +70,7 @@ ForEach ($user in Import-Csv $FilePath) {
         sqldb_aad_admin_objectid = $AADuser.ObjectId
         sqldb_aad_admin_type = "User"
     }
-    Add-AzDeployment -Location $Location -TemplateFile single_subscription_initial_deployment.bicep -TemplateParameterObject $UserDeploymentParameters -AsJob
+    New-AzDeployment -Location $Location -TemplateFile single_subscription_initial_deployment.bicep -TemplateParameterObject $UserDeploymentParameters -AsJob
     Add-AzureADGroupMember -ObjectId $group.ObjectId -RefObjectId $AADuser.ObjectId
 
     $users.Add(@{
