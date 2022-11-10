@@ -77,13 +77,14 @@ ForEach ($user in Import-Csv $FilePath) {
         UserName = $AADuser.UserPrincipalName
         Password = $Password
     })
+    $SubNetOctet++
 }
 
 Write-Host "All User deployments started, waiting on completion"
 
 $users | Format-Table
 
-While ((Get-Job | Where-Object {$_.State -ne "Complete"} | Measure-Object).Count > 0) {
+While ((Get-Job | Where-Object {$_.State -ne "Complete" -and $_.State -ne "Failed" -and $_.State -ne "Stopped"} | Measure-Object).Count > 0) {
     Get-AzDeployment
     Start-Sleep -Seconds 60
 }

@@ -40,17 +40,6 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-@description('Add the Reader Role to the specific user/group')
-module rbac 'single_subscription_permissions.bicep' = {
-  scope: rg
-  name: guid(rg.id, principalId)
-  params: {
-    principalId: principalId
-    principalType: principalType
-    roleId: 'acdd72a7-3385-48ef-bd42-f606fba81ae7'
-  }
-}
-
 module network 'network.bicep' = {
   name: 'labNetworkDeployment'
   scope: rg
@@ -62,5 +51,16 @@ module network 'network.bicep' = {
     sqlMiSubnetName: sqlMiSubnetName
     sqlMiSubnetPrefix: sqlMiSubnetPrefix
     bastionHostName: bastionHostName
+  }
+}
+
+@description('Add the Reader Role to the specific user/group')
+module rbac 'single_subscription_permissions.bicep' = {
+  scope: rg
+  name: guid(rg.id, principalId)
+  params: {
+    principalId: principalId
+    principalType: principalType
+    roleId: 'acdd72a7-3385-48ef-bd42-f606fba81ae7'
   }
 }
