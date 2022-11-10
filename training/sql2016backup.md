@@ -88,7 +88,7 @@ Resources used and authentication:
     - [Now run the restore from URL T-SQL script.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=tsql#restore-database) DO NOT forget to change the restore database name. 
 
 6. Verify that the AdventureWorks2016 database was properlly restored on the target database (Azure SQL MI): 
-    - If the name of database is different, you did not change it in last step. Therefore you can change it or rerun the restore with correct database name. 
-    - Run a simple query against any table and verify records have populated. Compare against source database. 
+    - If the name of database is different, you did not change it in last step. Therefore [you can change it](https://learn.microsoft.com/en-us/sql/relational-databases/databases/rename-a-database?view=sql-server-ver16#to-rename-an-azure-sql-database-database) or rerun the restore with correct database name. 
+    - Run a simple query against any table and verify tables have populated. Compare against source database. 
     - [Check compatibility level of the Azure SQL DB instance.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#TsqlProcedure) 
-    - Optional: [Change the Azure SQL Database name to match the source database name.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/rename-a-database?view=sql-server-ver16#to-rename-an-azure-sql-database-database
+    
