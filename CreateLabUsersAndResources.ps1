@@ -34,7 +34,7 @@ Function Get-Password() {
     return $TempPassword
 }
 
-Connect-AzureAd
+# Remember to document need for Connect-AzureAD before running script (can't be in script?)
 
 Select-AzSubscription -SubscriptionId $SubscriptionId
 
@@ -43,7 +43,7 @@ $group = New-AzureAdGroup -Description "SQL Migration Lab Users" -DisplayName $G
 $IntialDeploymentParameters = @{
     location = $Location
     bastionHostName = "csasqllabbastion"
-    principalId = $group.ObjectId
+    principalId = $group.ObjectId.ToString()
 }
 
 New-AzDeployment -Location $Location -TemplateFile single_subscription_initial_deployment.bicep -TemplateParameterObject $IntialDeploymentParameters
@@ -65,13 +65,13 @@ ForEach ($user in Import-Csv $FilePath) {
         administratorLogin = $user.UserName
         administratorLoginPassword = $Password
         vmSubnetPrefix = "10.217.$SubNetOctet.0/24"
-        principalId = $AADuser.ObjectId
+        principalId = $AADuser.ObjectId.ToString()
         sqldb_aad_admin_name = $AADuser.UserPrincipalName
-        sqldb_aad_admin_objectid = $AADuser.ObjectId
+        sqldb_aad_admin_objectid = $AADuser.ObjectId.ToString()
         sqldb_aad_admin_type = "User"
     }
     New-AzDeployment -Location $Location -TemplateFile single_subscription_initial_deployment.bicep -TemplateParameterObject $UserDeploymentParameters -AsJob
-    Add-AzureADGroupMember -ObjectId $group.ObjectId -RefObjectId $AADuser.ObjectId
+    Add-AzureADGroupMember -ObjectId $group.ObjectId.ToString() -RefObjectId $AADuser.ObjectId.ToString()
 
     $users.Add(@{
         UserName = $AADuser.UserPrincipalName
@@ -95,7 +95,7 @@ $DBMIDeploymentParameters = @{
     administratorLoginPassword = $MIPassword
     withAADAuth = $true
     aad_admin_name = $group.DisplayName
-    sqldb_aad_admin_objectid = $group.ObjectId
+    sqldb_aad_admin_objectid = $group.ObjectId.ToString()
 
 }
 
