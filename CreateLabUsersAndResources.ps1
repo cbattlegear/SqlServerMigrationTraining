@@ -82,7 +82,7 @@ ForEach ($user in Import-Csv $FilePath) {
 
 Write-Host "All User deployments started, waiting on completion"
 
-$users | Format-Table
+$users | ForEach-Object{[PSCustomObject]$_} | Format-Table
 
 While ((Get-Job | Where-Object {$_.State -ne "Complete" -and $_.State -ne "Failed" -and $_.State -ne "Stopped"} | Measure-Object).Count > 0) {
     Get-AzDeployment

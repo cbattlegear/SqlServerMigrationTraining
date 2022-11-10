@@ -12,7 +12,7 @@ param roleId string
 param principalType string
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: guid(resourceGroup().id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleId))
+  name: 'role-${guid(resourceGroup().id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleId))}'
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleId)
     principalId: principalId

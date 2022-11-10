@@ -41,7 +41,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 module network 'network.bicep' = {
-  name: 'labNetworkDeployment'
+  name: 'labNetwork-${guid(rg.id)}'
   scope: rg
   params: {
     location: location

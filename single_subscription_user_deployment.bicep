@@ -72,7 +72,7 @@ module rbac 'single_subscription_permissions.bicep' = {
 }
 
 module vmsubnet 'single_subscription_vm_subnet.bicep' = {
-  name: 'vmSubnetDeployment'
+  name: 'subnet-${guid(rg.id)}'
   scope: networkRg
   params: {
     existingVNETName: virtualNetworkName
@@ -82,7 +82,7 @@ module vmsubnet 'single_subscription_vm_subnet.bicep' = {
 }
 
 module labvm 'labvm.bicep' = {
-  name: 'labVmDeployment'
+  name: 'labvm-${guid(rg.id)}'
   scope: rg
   params: {
     vmName: 'vm${uniqueString(rg.id)}'
@@ -98,7 +98,7 @@ module labvm 'labvm.bicep' = {
 }
 
 module sqldb 'sqldb.bicep' = {
-  name: 'sqlDbDeployment'
+  name: 'sqldb-${guid(rg.id)}'
   scope: rg
   params: {
     location: location
@@ -115,7 +115,7 @@ module sqldb 'sqldb.bicep' = {
 }
 
 module storage 'storage.bicep' = {
-  name: 'storageAccountDeployment'
+  name: 'storage-${guid(rg.id)}'
   scope: rg
   params: {
     location: location
