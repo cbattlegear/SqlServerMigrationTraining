@@ -48,7 +48,7 @@ Resources used and authentication:
 5. Verify that the last transactions made before cutover reflect on the Azure SQL Managed Instance - AdventureWorks2019.
     
 
-Great job, you just completed the second module! Move on the third module, [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](/training/sql2012dma.md)
+Great job! You just completed the second module! Move on the third module, [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](/training/sql2012dma.md)
 
 
 
