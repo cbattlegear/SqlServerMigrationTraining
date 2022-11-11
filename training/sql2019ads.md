@@ -1,6 +1,6 @@
 # Migrate SQL 2019 to SQL Managed Instance with Azure Data Studio - Online
 
-In this portion of the training you will be doing an assessment and online migration of SQL Server 2019 with Azure Data Studio. This module will cover an online migration scenario when minimal downtime is required. You will be performing the asssessment and migration of the SQL database with Azure Data Studio. If there are any compatibility or feature parity issues, address them prior to the migration. 
+In this portion of the training, you will be doing an assessment and online migration of SQL Server 2019 with Azure Data Studio. This module will cover an online migration scenario when minimal downtime is required. You will be performing the assessment and migration of the SQL database with Azure Data Studio. If there are any compatibility or feature parity issues, address them prior to the migration. 
 
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
@@ -8,7 +8,7 @@ Resources used and authentication:
   - Azure SQL MI (Azure Active Directory) 
   - Azure Storage Account (SQL Server Credential will be created to authenticate) 
 
-***NOTE*** - *Same Azure Storage Account will be used, but you will create a new container. You will also create a new SAS and SQL Credentails. Use the Azure Portal to create the SAS in this module*
+***NOTE*** - *Same Azure Storage Account will be used, but you will create a new container. You will also create a new SAS and SQL Credentials. Use the Azure Portal to create the SAS in this module*
 
 ## Steps
 
@@ -20,9 +20,9 @@ Resources used and authentication:
     - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
     - Create a container with public access level set to private. Name it 'sqlbackup2019' (Can be any name).
 
-***IMPORTANT NOTE*** - *Verify the database recovery mode before doing the first backup. The database needs to be in Full recovery model in order for us to take a Tail-log backup at the end of this module. Check the recovery model through SSMS database options or use T-SQL to [view recovery model and to change recovery model.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/view-or-change-the-recovery-model-of-a-database-sql-server?view=sql-server-ver16#to-view-the-recovery-model) After you alter the database to full recovery, the changes will not take effect until you do a full backup. This will start the log chain.*
+***IMPORTANT NOTE*** - *Verify the database recovery mode before doing the first backup. The database needs to be in Full recovery model for you to take a Tail-log backup at the end of this module. Check the recovery model through SSMS database options or use T-SQL to [view recovery model and to change recovery model.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/view-or-change-the-recovery-model-of-a-database-sql-server?view=sql-server-ver16#to-view-the-recovery-model) After you alter the database to full recovery, the changes will not take effect until you do a full backup. This will start the log chain.*
 
-3. Backup SQL Server 2019 -AdventureWorks 2019 database to URL (Azure Storage Account). 
+3. Backup SQL Server 2019 -AdventureWorks2019 database to URL (Azure Storage Account). 
    
     ***NOTE*** - *Use SSMS GUI to take database backup. Make sure you do Full backup to URL with CHECKSUM. Enable the CHECKSUM option before doing the credential on the backup database pane*
     
@@ -33,7 +33,7 @@ Resources used and authentication:
 4. Use Azure Data Studio to assess and migrate SQL Server 2019 database (AdventureWorks2019) to Azure SQL MI. 
     - Open Azure SQL Data Studio and [install the Azure SQL Migration extension from the marketplace.](https://learn.microsoft.com/en-us/sql/azure-data-studio/extensions/azure-sql-migration-extension?view=sql-server-ver16#install-the-azure-sql-migration-extension)
     
-    ***NOTE*** - *In the next set of instructions you are prompted to downlaod and install Microsoft Integration runttime, please skip. Not required for this module.*
+    ***NOTE*** - *In the next set of instructions you are prompted to download and install Microsoft Integration runtime, please skip. Not required for this module.*
     
     - [Follow these instructions to assess and migrate SQL Server.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#launch-the-migrate-to-azure-sql-wizard-in-azure-data-studio)
 
@@ -41,14 +41,14 @@ Resources used and authentication:
     
     ***NOTE*** - In a live environment, transactions will continue to occur until all incoming traffic to the SQL Server is stopped. You will simulate this scenario in the next steps before completing the cutover. 
     
-    - To simulate live transactions on the source database (SQL Server 2019 - AdventureWorks 2019) do the following edits to the following database tables: 
+    - To simulate live transactions on the source database (SQL Server 2019 - AdventureWorks2019) do the following edits to the following database tables: 
       - HumanResources.JobCandidate --> Add a column (HireFlag). Make it a bit data type. Allow Nulls. Update any 5 rows by setting HireFlag to 1. 
       - Production.ProductReview --> Insert 2 new reviews for Product ID 988 and  795 
 
     - [Complete the migration cutover.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#complete-migration-cutover)
       - [Instructions for tail-log backup.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-the-transaction-log-when-the-database-is-damaged-sql-server?view=sql-server-ver15#SSMSProcedure)
 
-5. Verify that the last transactions made before cutover reflect on the Azure SQL Managed Instance - AdventureWorks2019.
+5. Verify that the last transactions made before cutover reflect on Azure SQL Managed Instance - AdventureWorks2019.
    
 
 Great job! You just completed the second module! Move on the third module, [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](/training/sql2012dma.md)
