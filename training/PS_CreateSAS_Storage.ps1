@@ -9,7 +9,7 @@
       $policyName = 'saspolicyname' # the name of the SAS policy you will create
 
       # Set a variable for the name of the resource group you will use. Should be SQLMigrationLab but double check
-      $resourceGroupName= 'SQLMigrationLab'
+      $resourceGroupName= '<alias-SqlLab>' # ResourceGroup name, change 
 
       # adds an authenticated Azure account for use in the session
       Connect-AzAccount
