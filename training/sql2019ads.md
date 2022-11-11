@@ -44,9 +44,10 @@ Resources used and authentication:
       - Production.ProductReview --> Insert 2 new reviews for Product ID 988 and  795 
 
     - [Complete the migration cutover.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#complete-migration-cutover)
+      - [Instructions for tail-log backup.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-the-transaction-log-when-the-database-is-damaged-sql-server?view=sql-server-ver15#SSMSProcedure)
 
 5. Verify that the last transactions made before cutover reflect on the Azure SQL Managed Instance - AdventureWorks2019.
-    
+   
 
 Great job! You just completed the second module! Move on the third module, [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](/training/sql2012dma.md)
 
