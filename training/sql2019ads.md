@@ -5,7 +5,7 @@ In this portion of the training you will be doing an assessment and online migra
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
     - SQL Server 2019 - AdventureWorks2019 (Windows Authentication)
-  - Azure SQL MI (SQL Server Authentication - Same username/password) 
+  - Azure SQL MI (Azure Active Directory) 
   - Azure Storage Account (SQL Server Credential will be created to authenticate) 
 
 ***NOTE*** - *Same Azure Storage Account will be used, but you will create a new container. You will also create a new SAS and SQL Credentails. Use the Azure Portal to create the SAS in this module*
@@ -37,8 +37,16 @@ Resources used and authentication:
 
     - Once you start the live migration, you can [monitor the progress until the backups are restored to SQL MI.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#monitor-your-migration) The Migration status will show 'in progress' until you are ready to cut over. This is the only downtime that will occur during the process. 
     
-    - Complete the migration cutover and take the last tail logs from the source SQL Server. 
+    ***NOTE*** - In a live environment, transactions will continue to occur until all incoming traffic to the SQL Server is stopped. You will simulate this scenario in the next steps before completing the cutover. 
+    
+    - To simulate live transactions on the source database (SQL Server 2019 - AdventureWorks 2019) do the following edits to the following database tables: 
+      - HumanResources.JobCandidate --> Add a column (HireFlag). Make it a bit data type. Allow Nulls. Update any 5 rows by setting HireFlag to 1. 
+      - Production.ProductReview --> Insert 2 new reviews for Product ID 988 and  795 
 
+    - [Complete the migration cutover.](https://learn.microsoft.com/en-us/azure/dms/tutorial-sql-server-managed-instance-online-ads#complete-migration-cutover)
+
+5. Verify that the last transactions made before cutover reflect on the Azure SQL Managed Instance - AdventureWorks2019.
+    
 
 Great job, you just completed the second module! Move on the third module, [SQL Server 2012 => Offline migration - Microsoft Data Migration Assistant (DMA) migration to Azure SQL DB](/training/sql2012dma.md)
 
