@@ -31,7 +31,7 @@ Resources used and authentication:
 4. T-SQL Backup SQL Server 2016 - AdventureWorks2016 database to URL (Azure Storage Account):
     - Open SSMS and login to the SQL Server 2016. 
     - First step of the backup is to have a container to upload the .bak file (already completed in step 3). 
-    - In order to authenticate to the Azure Storage container, you require a SQL Server credential that will include a shared access signature (SAS) for the storage container. 
+    - To authenticate to the Azure Storage container, you require a SQL Server credential that will include a shared access signature (SAS) for the storage container. 
     - Create the SAS to your storage container first. The PowerShell script below will create and output the T-SQL 'CREATE CREDENTIAL' with the SAS that will be used in the next step. Copy and paste the below script to a text editor. Modify the variables according to your resource names. Open Azure Cloud Shell and execute in PowerShell mode. Copy and save the T-SQL 'CREATE CREDENTIAL' output for the next step.  
 
       ![Use this PowerShell script to create a Shared Access Signature to the Storage Account](/training/PS_CreateSAS_Storage.ps1)
@@ -46,7 +46,7 @@ Resources used and authentication:
 
 5. T-SQL Restore from URL to Azure SQL MI.
     - Connect to the Azure SQL MI instance from SSMS. 
-    - You need to create a SQL Server Credential on the SQL MI as well to access the storage container with SAS. Luckily you already have the T-SQL. Open a new query on the Azure SQL MI and execute the same CREATE CREDENTIAL T-SQL script that contains the SAS. 
+    - You need to create a SQL Server Credential on SQL MI as well to access the storage container with SAS. Luckily you already have the T-SQL. Open a new query on Azure SQL MI and execute the same CREATE CREDENTIAL T-SQL script that contains the SAS. 
     - [Now run the restore from URL T-SQL script.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=tsql#restore-database) DO NOT forget to change the restore database name. 
 
 6. Verify that the AdventureWorks2016 database was properly restored on the target database (Azure SQL MI): 
