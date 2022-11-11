@@ -25,7 +25,7 @@ Resources used and authentication:
    - Verify there are no feature parity or compatibility issues. Fix any issues before migrating the database.
 
 3. Create container for SQL Server database backup in the provided Azure Storage Account
-    - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
+    - Locate the Azure Storage Account created under the provisioned resource group (alias-SqlLab).
     - [Create a container with public access level set to private.](https://learn.microsoft.com/en-us/sql/relational-databases/tutorial-sql-server-backup-and-restore-to-azure-blob-storage-service?view=sql-server-ver16&tabs=SSMS#create-azure-blob-storage-container) Name it 'sqlbackup2016' (Can be any name). 
     
 4. T-SQL Backup SQL Server 2016 - AdventureWorks2016 database to URL (Azure Storage Account):
