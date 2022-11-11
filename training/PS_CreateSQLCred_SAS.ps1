@@ -1,4 +1,4 @@
-```powershell
+
 
       # Define global variables for the script  
       $prefixName = '<a prefix name>'  # used as the prefix for the name for various objects  
@@ -36,4 +36,4 @@
       $tSql = "CREATE CREDENTIAL [{0}] WITH IDENTITY='Shared Access Signature', SECRET='{1}'" -f $cbc.Uri,$sas.Substring(1)   
       Write-Host $tSql
 
-      ```
+ 
