@@ -20,6 +20,8 @@ Resources used and authentication:
     - Locate the Azure Storage Account created under the provisioned resource group (SQLMigrationLab).
     - Create a container with public access level set to private. Name it 'sqlbackup2019' (Can be any name).
 
+***IMPORTANT NOTE*** - *Verify the database recovery mode before doing the first backup. The database needs to be in Full recovery model in order for us to take a Tail-log backup at the end of this module. Check the recovery model through SSMS database options or use T-SQL to [view recovery model and to change recovery model.](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/view-or-change-the-recovery-model-of-a-database-sql-server?view=sql-server-ver16#to-view-the-recovery-model) After you alter the database to full recovery, the changes will not take effect until you do a full backup. This will start the log chain.*
+
 3. Backup SQL Server 2019 -AdventureWorks 2019 database to URL (Azure Storage Account). 
    
     ***NOTE*** - *Use SSMS GUI to take database backup. Make sure you do Full backup to URL with CHECKSUM. Enable the CHECKSUM option before doing the credential on the backup database pane*
