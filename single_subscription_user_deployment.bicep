@@ -11,7 +11,7 @@ param networkRgName string = 'SQLMigrationLab'
 param location string
 
 @description('Default VM Size')
-param vmSize string = 'Standard_E8s_v4'
+param vmSize string = 'Standard_E4s_v4'
 
 @description('Enter the SQL DB Database name.')
 param sqlDBDatabaseName string = 'SqlMigrationLab'
