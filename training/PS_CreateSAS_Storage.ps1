@@ -1,7 +1,6 @@
 
 
-      # Define global variables for the script  
-      $prefixName = '<a prefix name>'  # used as the prefix for the name for various objects  
+      # Define global variables for the script    
       $subscriptionName= '<your subscription name>'   # the name of subscription name you will use  
       $locationName = '<a data center location>'  # the data center region you will use  
       $storageAccountName= '<storage account name>' # the storage account name you will use  
