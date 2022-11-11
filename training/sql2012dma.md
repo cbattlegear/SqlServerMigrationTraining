@@ -1,11 +1,11 @@
 # Migrate SQL Server 2012 to Azure SQL DB with Data Migration Assistant (DMA) - Offline
 
-In this portion of the training you will be doing an assessment and offline migration of SQL Server 2012 using the Azure Data Migration Assistant (DMA). You are expected to review the assessment and validate that there are no SQL feature parity or compatibility issues that are preventing a migration to Azure SQL DB. Address any issues prior to migration.
+In this portion of the training, you will be doing an assessment and offline migration of SQL Server 2012 using the Azure Data Migration Assistant (DMA). You are expected to review the assessment and validate that there are no SQL feature parity or compatibility issues that are preventing a migration to Azure SQL DB. Address any issues prior to migration.
 
 Resources used and authentication: 
   - Azure SQL Server VM (Username/password)
     - SQL Server 2012 - AdventureWorks2012 (Windows Authentication)
-  - Azure SQL DB (SQL Server Authentication - Same username/password)
+  - Azure SQL DB (Azure Active Directory)
  
  ## Steps:
  
@@ -13,7 +13,7 @@ Resources used and authentication:
    - Bastion into Azure SQL VM. 
    - Sign into Azure SQL DB through SSMS. 
       
-      **Note** - *You will run into a firewall rule prompt. DO NOT add the rule through here. Add the Azure SQL DB firewall rule through the Azure Portal. The client (Azure SQL VM) IP Address needs to be explicitly added in order to establish a connection.* 
+      **Note** - *You will run into a firewall rule prompt. DO NOT add the rule through here. Add the Azure SQL DB firewall rule through the Azure Portal. The client (Azure SQL VM) IP Address needs to be explicitly added to establish a connection.* 
 
 2. Use DMA to assess and migrate SQL Server 2012 database (Adventureworks2012) to Azure SQL DB:
       
@@ -33,4 +33,4 @@ Resources used and authentication:
     - [Check compatibility level of the Azure SQL DB instance.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/view-or-change-the-compatibility-level-of-a-database?view=sql-server-ver16#TsqlProcedure) 
     - Optional: [Change the Azure SQL Database name to match the source database name.](https://learn.microsoft.com/en-us/sql/relational-databases/databases/rename-a-database?view=sql-server-ver16#to-rename-an-azure-sql-database-database)
 
-***GREAT JOB! You are done with this SQL Server Migration hands-on workshop***
+***Excellent! You are done with this SQL Server Migration hands-on workshop***
